@@ -1,50 +1,91 @@
-import { faker } from "@faker-js/faker";
-
 export default {
   getPosts() {
-    return [...Array(30)].map((_, i) => ({
-      id: faker.string.uuid(),
-      image: faker.image.url(),
-      text: faker.lorem.paragraphs(2),
-      createdAt: new Date().toLocaleDateString(),
-      user: {
-        name: `${faker.person.firstName()} ${faker.person.lastName()}`,
-        avatar: faker.image.url(),
-        id: faker.string.uuid()
-      },
-      reactionIcons: ["Like", "Love", "Haha"],
-      reactionUser: {
-        isReaction: i % 4 === 0,
-        type: "Like",
-        text: "like"
-      },
-      reactions: {
-        types: ["Like", "Love", "Haha"],
-        isReaction: i % 4 === 0,
-        total: faker.string.numeric(500),
-        userReaction: {
+    const posts = [
+      {
+        id: "post-1",
+        image: "https://via.placeholder.com/300x200?text=Post+1",
+        text: "محدش جرب كشري التحرير بعد الساعة 8؟ حاسس الطعم بيختلف عن الصبح 🤔",
+        createdAt: "2025-04-30",
+        user: {
+          name: "أحمد طارق",
+          avatar: "https://via.placeholder.com/100?text=AT",
+          id: "user-1"
+        },
+        reactionIcons: ["Like", "Love", "Haha"],
+        reactionUser: {
+          isReaction: true,
           type: "Like",
-          text: "like"
+          text: "أعجبني"
+        },
+        reactions: {
+          types: ["Like", "Love", "Haha"],
+          isReaction: true,
+          total: 124,
+          userReaction: {
+            type: "Like",
+            text: "أعجبني"
+          }
+        },
+        comments: {
+          total: 18
         }
       },
-      comments: {
-        total: faker.string.numeric(200)
+      {
+        id: "post-2",
+        image: "https://via.placeholder.com/300x200?text=Post+2",
+        text: "البحر في إسكندرية النهاردة وهمي! الهوا، المنظر، وكل حاجة كانت تفتح النفس 🌊",
+        createdAt: "2025-04-29",
+        user: {
+          name: "مريم حسام",
+          avatar: "https://via.placeholder.com/100?text=MH",
+          id: "user-2"
+        },
+        reactionIcons: ["Like", "Love", "Haha"],
+        reactionUser: {
+          isReaction: false,
+          type: "Love",
+          text: "أحببته"
+        },
+        reactions: {
+          types: ["Like", "Love", "Haha"],
+          isReaction: false,
+          total: 92,
+          userReaction: {
+            type: "Love",
+            text: "أحببته"
+          }
+        },
+        comments: {
+          total: 10
+        }
       }
-    }));
+    ];
+
+    return posts;
   },
 
-  getPostById(postId: string) {
-    const post = this.getPosts().filter((e) => e.id === postId)[0];
+  getPostById(postId) {
+    const post = this.getPosts().find((e) => e.id === postId);
     return {
       ...post,
-      list: [...Array(10)].map((_, i) => ({
-        user: {
-          name: faker.person.firstName(),
-          avatar: faker.image.url(),
-          id: faker.string.uuid()
+      list: [
+        {
+          user: {
+            name: "يوسف جمال",
+            avatar: "https://via.placeholder.com/80?text=YG",
+            id: "user-3"
+          },
+          message: "أنا كنت هناك امبارح برضو! الجو كان تحفة فعلاً 🔥"
         },
-        message: faker.lorem.paragraph(1)
-      }))
+        {
+          user: {
+            name: "سلمى عادل",
+            avatar: "https://via.placeholder.com/80?text=SA",
+            id: "user-4"
+          },
+          message: "الصورة تحفة بجد 😍، حاسة إني محتاجة خروجة ضروري"
+        }
+      ]
     };
   }
 };
