@@ -1,10 +1,21 @@
-import { faker } from "@faker-js/faker";
+const egyptianGirlsNames = [
+  "Mariam Ahmed",
+  "Sara Mostafa",
+  "Farida Ali",
+  "Habiba Mahmoud",
+  "Laila Hassan",
+  "Nada Youssef",
+  "Salma Adel",
+  "Yasmin Khaled",
+  "Dina Magdy",
+  "Nourhan Amr"
+];
 
 export default {
   getContacts: () =>
-    [...Array(30)].map(() => ({
-      id: faker.string.uuid(),
-      name: `${faker.person.firstName()} ${faker.person.lastName()}`,
+    egyptianGirlsNames.map((name, index) => ({
+      id: `user-${index + 1}`,
+      name,
       isOnline: true
     }))
 };
